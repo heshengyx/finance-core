@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myself.finance.mapper.UserProductMapper">
+	<resultMap type="com.myself.finance.data.UserProductData" id="userProductDataResult">
+<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+<result column="MONEY" property="money" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<select id="getData" resultMap="userProductDataResult">
+		SELECT * FROM PRODUCT WHERE ID=#{id, jdbcType=VARCHAR}
+	</select>
+	<select id="query" resultMap="userProductDataResult">
+		SELECT b.USERNAME, a.MONEY, a.CREATE_TIME FROM USER_PRODUCT a join USER b on a.USER_ID = b.ID
+		<where>
+<if test="entity.productId != null and entity.productId != ''">
+	and a.PRODUCT_ID = #{entity.productId}
+</if>
+</where> 
+		order by a.CREATE_TIME desc
+	</select>
+</mapper>
