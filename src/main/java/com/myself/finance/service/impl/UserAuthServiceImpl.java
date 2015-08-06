@@ -10,7 +10,7 @@ import com.myself.finance.entity.UserAuth;
 import com.myself.finance.param.UserAuthQueryParam;
 import com.myself.finance.service.UserAuthService;
 
-@Service
+@Service("userAuthService")
 public class UserAuthServiceImpl implements UserAuthService {
 
 	@Autowired

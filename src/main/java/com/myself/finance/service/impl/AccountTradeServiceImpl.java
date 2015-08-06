@@ -15,7 +15,7 @@ import com.myself.finance.page.Page;
 import com.myself.finance.param.AccountTradeQueryParam;
 import com.myself.finance.service.AccountTradeService;
 
-@Service
+@Service("accountTradeService")
 public class AccountTradeServiceImpl implements AccountTradeService {
 
 	private final static Logger logger = LoggerFactory

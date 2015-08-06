@@ -11,7 +11,7 @@ import com.myself.finance.page.Page;
 import com.myself.finance.param.ProductQueryParam;
 import com.myself.finance.service.ProductService;
 
-@Service
+@Service("productService")
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired

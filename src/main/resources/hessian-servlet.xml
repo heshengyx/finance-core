@@ -21,4 +21,28 @@
         <property name="serviceInterface" value="com.myself.finance.service.PermissionService" />  
     </bean>
     
+    <bean name="/productService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
+        <property name="service" ref="productService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.ProductService" />  
+    </bean>
+    
+    <bean name="/userProductService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
+        <property name="service" ref="userProductService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.UserProductService" />  
+    </bean>
+    
+    <bean name="/userAuthService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
+        <property name="service" ref="userAuthService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.UserAuthService" />  
+    </bean>
+    
+    <bean name="/accountService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
+        <property name="service" ref="accountService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.AccountService" />  
+    </bean>
+    
+    <bean name="/accountTradeService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
+        <property name="service" ref="accountTradeService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.AccountTradeService" />  
+    </bean>
 </beans>
