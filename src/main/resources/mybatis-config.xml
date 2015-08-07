@@ -9,7 +9,8 @@
 		<!-- <typeAlias type="com.myself.finance.page.Page" alias="pageResult" /> -->
 	</typeAliases>
 	
+	<!--
 	<plugins>  
     	<plugin interceptor="com.myself.finance.interceptor.PageInterceptor" />   
-	</plugins>
+	</plugins>-->
 </configuration>

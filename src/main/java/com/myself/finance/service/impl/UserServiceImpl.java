@@ -1,6 +1,8 @@
 package com.myself.finance.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
@@ -15,7 +17,10 @@ import com.myself.finance.dao.AccountDao;
 import com.myself.finance.dao.UserDao;
 import com.myself.finance.entity.Account;
 import com.myself.finance.entity.User;
+import com.myself.finance.page.IPage;
+import com.myself.finance.page.Pager;
 import com.myself.finance.param.UserParam;
+import com.myself.finance.param.UserQueryParam;
 import com.myself.finance.service.UserService;
 
 @Service("userService")
@@ -87,5 +92,21 @@ public class UserServiceImpl implements UserService {
 
 	public User getData(User param) {
 		return userDao.getData(param);
+	}
+
+	@Override
+	public IPage<User> query(UserQueryParam param) {
+		IPage<User> pager = null;
+		int count = userDao.count(param);
+		if (count > 0) {
+			int page = (param.getPage() <= 0) ? 1 : param.getPage();
+			int start = (page - 1) * param.getLength();
+			int end = param.getLength();
+			List<User> list = userDao.query(param, start, end);
+			pager = new Pager<User>(list, count, page, end);
+		} else {
+			pager = new Pager<User>(new ArrayList<User>(), 0, 1, 1);
+		}
+		return pager;
 	}
 }

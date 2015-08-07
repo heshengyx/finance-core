@@ -131,6 +131,7 @@ public class PageInterceptor implements Interceptor {
 			if (rs.next()) {
 				int totalRecord = rs.getInt(1);
 				page.setTotalRecord(totalRecord);
+				page.getParams().put("totalRecord", Integer.valueOf(totalRecord));
 			}
 		} catch (SQLException e) {
 		} finally {

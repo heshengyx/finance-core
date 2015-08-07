@@ -12,6 +12,13 @@
 <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
 	</resultMap>
 	
+	<sql id="sqlQuery">
+		FROM USER a where 1=1
+		<if test="param.username != null and param.username != ''">
+			and USERNAME = #{param.username}
+		</if>
+	</sql>
+	
 	<select id="getData" resultMap="userResult">
 		SELECT * FROM USER WHERE 1=1
 		<if test="account != null and account != ''">
@@ -24,24 +31,12 @@
 			and ID = #{id}
 		</if>
 	</select>
-	
-	<select id="list" resultMap="userResult">
-		SELECT * FROM CLAZZ 
-		<where>
-<if test="entity.className != null and entity.className != ''">
-	and CLASS_NAME = #{entity.className}
-</if>
-<if test="entity.tableName != null and entity.tableName != ''">
-	and TABLE_NAME = #{entity.tableName}
-</if>
-<if test="entity.status != null and entity.status != ''">
-	and STATUS = #{entity.status}
-</if>
-<if test="entity.createTime != null and entity.createTime != ''">
-	and to_char(CREATE_TIME, 'YYYY-MM-DD') = #{entity.createTime}
-</if>
-</where> 
-		order by CREATE_TIME desc
+	<select id="count" resultType="java.lang.Integer">
+		SELECT COUNT(1) <include refid="sqlQuery"/>
+	</select>
+	<select id="query" resultMap="userResult">
+		SELECT * <include refid="sqlQuery"/> 
+			order by CREATE_TIME desc limit #{start}, #{end}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">

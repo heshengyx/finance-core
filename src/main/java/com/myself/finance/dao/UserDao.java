@@ -1,6 +1,9 @@
 package com.myself.finance.dao;
 
+import java.util.List;
+
 import com.myself.finance.entity.User;
+import com.myself.finance.param.UserQueryParam;
 
 public interface UserDao {
 
@@ -8,4 +11,7 @@ public interface UserDao {
 	int update(User param);
 	int delete(User param);
 	User getData(User param);
+	
+	int count(UserQueryParam param);
+	List<User> query(UserQueryParam param, int start, int end);
 }
