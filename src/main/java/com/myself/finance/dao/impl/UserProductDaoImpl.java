@@ -19,4 +19,11 @@ public class UserProductDaoImpl extends BaseDao<UserProductMapper> implements Us
 		return mapper.query(param);
 	}
 
+	@Override
+	public List<UserProductData> query(UserProductQueryParam param, int start,
+			int end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

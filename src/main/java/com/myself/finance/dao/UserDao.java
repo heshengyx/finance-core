@@ -14,4 +14,5 @@ public interface UserDao {
 	
 	int count(UserQueryParam param);
 	List<User> query(UserQueryParam param, int start, int end);
+	List<User> query(UserQueryParam param);
 }

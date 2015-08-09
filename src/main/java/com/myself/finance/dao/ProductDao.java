@@ -13,4 +13,7 @@ public interface ProductDao {
 	int delete(Product param);
 	Product getData(Product param);
 	List<Product> list(Page<ProductQueryParam> param);
+	
+	int count(ProductQueryParam param);
+	List<Product> query(ProductQueryParam param, int start, int end);
 }

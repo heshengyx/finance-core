@@ -45,4 +45,10 @@ public class UserDaoImpl extends BaseDao<UserMapper> implements UserDao {
 		return mapper.count(param);
 	}
 
+	@Override
+	public List<User> query(UserQueryParam param) {
+		UserMapper mapper = getMapper(UserMapper.class);
+		return mapper.query(param, param.getStart(), param.getLength());
+	}
+
 }

@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
+	@Override
 	public User getData(User param) {
 		return userDao.getData(param);
 	}
@@ -101,8 +102,9 @@ public class UserServiceImpl implements UserService {
 		if (count > 0) {
 			int page = (param.getPage() <= 0) ? 1 : param.getPage();
 			int start = (page - 1) * param.getLength();
+			param.setStart(start);
 			int end = param.getLength();
-			List<User> list = userDao.query(param, start, end);
+			List<User> list = userDao.query(param);
 			pager = new Pager<User>(list, count, page, end);
 		} else {
 			pager = new Pager<User>(new ArrayList<User>(), 0, 1, 1);
