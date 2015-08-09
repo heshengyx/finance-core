@@ -8,7 +8,6 @@ import com.myself.finance.dao.BaseDao;
 import com.myself.finance.dao.IPermissionDao;
 import com.myself.finance.entity.Permission;
 import com.myself.finance.mapper.IPermissionMapper;
-import com.myself.finance.page.Page;
 import com.myself.finance.param.PermissionQueryParam;
 
 @Repository
@@ -44,9 +43,10 @@ public class PermissionDaoImpl extends BaseDao<IPermissionMapper> implements IPe
 		return mapper.getData(param);
 	}
 
-	public List<Permission> list(Page<PermissionQueryParam> param) {
+	@Override
+	public List<Permission> query(PermissionQueryParam param, int start, int end) {
 		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
-		return mapper.query(param);
+		return mapper.query(param, start, end);
 	}
 
 }

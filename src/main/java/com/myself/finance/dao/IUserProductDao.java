@@ -7,5 +7,6 @@ import com.myself.finance.param.UserProductQueryParam;
 
 public interface IUserProductDao {
 
+	int count(UserProductQueryParam param);
 	List<UserProductData> query(UserProductQueryParam param, int start, int end);
 }

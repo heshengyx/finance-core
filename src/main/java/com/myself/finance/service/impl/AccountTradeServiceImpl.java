@@ -1,7 +1,6 @@
 package com.myself.finance.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IAccountTradeDao;
 import com.myself.finance.entity.AccountTrade;
-import com.myself.finance.page.Page;
+import com.myself.finance.page.IPage;
 import com.myself.finance.param.AccountTradeQueryParam;
 import com.myself.finance.service.IAccountTradeService;
 
@@ -43,7 +42,9 @@ public class AccountTradeServiceImpl implements IAccountTradeService {
 		return null;
 	}
 
-	public List<AccountTrade> list(Page<AccountTradeQueryParam> param) {
-		return accountDetailDao.list(param);
+	@Override
+	public IPage<AccountTrade> query(AccountTradeQueryParam param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

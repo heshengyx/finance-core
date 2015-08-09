@@ -7,16 +7,25 @@
 <result column="MONEY" property="money" jdbcType="NUMERIC" />
 	</resultMap>
 
+	<sql id="sqlQuery">
+		FROM USER_PRODUCT a join USER b on a.USER_ID = b.ID
+		<if test="param.productId != null and param.productId != ''">
+			and a.PRODUCT_ID = #{param.productId}
+		</if>
+	</sql>
+	
 	<select id="getData" resultMap="userProductDataResult">
 		SELECT * FROM PRODUCT WHERE ID=#{id, jdbcType=VARCHAR}
 	</select>
+	<select id="count" resultType="java.lang.Integer">
+		SELECT COUNT(1) <include refid="sqlQuery"/>
+	</select>
 	<select id="query" resultMap="userProductDataResult">
-		SELECT b.USERNAME, a.MONEY, a.CREATE_TIME FROM USER_PRODUCT a join USER b on a.USER_ID = b.ID
-		<where>
-<if test="entity.productId != null and entity.productId != ''">
-	and a.PRODUCT_ID = #{entity.productId}
-</if>
-</where> 
-		order by a.CREATE_TIME desc
+		SELECT 
+			b.USERNAME, 
+			a.MONEY, 
+			a.CREATE_TIME 
+		<include refid="sqlQuery"/> 
+			order by a.CREATE_TIME desc limit #{start}, #{end}
 	</select>
 </mapper>

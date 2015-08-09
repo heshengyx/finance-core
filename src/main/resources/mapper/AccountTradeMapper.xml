@@ -12,21 +12,26 @@
 <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
 	</resultMap>
 
+	<sql id="sqlQuery">
+		FROM ACCOUNT_TRADE a where 1=1
+		<if test="param.type != null and param.type != ''">
+			and TYPE = #{param.type}
+		</if>
+		<if test="param.date != null and param.date != ''">
+			and to_char(CREATE_TIME, 'YYYY-MM-DD') = #{param.date}
+		</if>
+		and USER_ID = #{param.userId}
+	</sql>
+	
 	<select id="getData" resultMap="accountTradeResult">
 		SELECT * FROM PRODUCT WHERE ID=#{id, jdbcType=VARCHAR}
 	</select>
+	<select id="count" resultType="java.lang.Integer">
+		SELECT COUNT(1) <include refid="sqlQuery"/>
+	</select>
 	<select id="query" resultMap="accountTradeResult">
-		SELECT * FROM ACCOUNT_TRADE 
-		<where>
-<if test="entity.type != null and entity.type != ''">
-	and TYPE = #{entity.type}
-</if>
-<if test="entity.date != null and entity.date != ''">
-	and to_char(CREATE_TIME, 'YYYY-MM-DD') = #{entity.date}
-</if>
-and USER_ID = #{entity.userId}
-</where>
-		order by CREATE_TIME desc
+		SELECT * <include refid="sqlQuery"/>
+			order by CREATE_TIME desc limit #{start}, #{end}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">

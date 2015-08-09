@@ -8,7 +8,6 @@ import com.myself.finance.dao.BaseDao;
 import com.myself.finance.dao.IRoleDao;
 import com.myself.finance.entity.Role;
 import com.myself.finance.mapper.IRoleMapper;
-import com.myself.finance.page.Page;
 import com.myself.finance.param.RoleQueryParam;
 
 @Repository
@@ -39,9 +38,15 @@ public class RoleDaoImpl extends BaseDao<IRoleMapper> implements IRoleDao {
 		return mapper.getData(param);
 	}
 
-	public List<Role> list(Page<RoleQueryParam> param) {
+	@Override
+	public List<Role> query(RoleQueryParam param, int start, int end) {
 		IRoleMapper mapper = getMapper(IRoleMapper.class);
-		return mapper.query(param);
+		return mapper.query(param, start, end);
 	}
 
+	@Override
+	public int count(RoleQueryParam param) {
+		IRoleMapper mapper = getMapper(IRoleMapper.class);
+		return mapper.count(param);
+	}
 }

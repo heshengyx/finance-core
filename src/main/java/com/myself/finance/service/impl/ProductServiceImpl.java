@@ -10,7 +10,6 @@ import com.myself.finance.dao.IProductDao;
 import com.myself.finance.entity.Product;
 import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
-import com.myself.finance.page.Pager;
 import com.myself.finance.param.ProductQueryParam;
 import com.myself.finance.service.IProductService;
 
@@ -39,10 +38,6 @@ public class ProductServiceImpl implements IProductService {
 		return productDao.getData(param);
 	}
 
-	public List<Product> list(Page<ProductQueryParam> param) {
-		return productDao.list(param);
-	}
-
 	@Override
 	public IPage<Product> query(ProductQueryParam param) {
 		IPage<Product> pager = null;
@@ -52,9 +47,9 @@ public class ProductServiceImpl implements IProductService {
 			int start = (page - 1) * param.getLength();
 			int end = param.getLength();
 			List<Product> list = productDao.query(param, start, end);
-			pager = new Pager<Product>(list, count, page, end);
+			pager = new Page<Product>(list, count, page, end);
 		} else {
-			pager = new Pager<Product>(new ArrayList<Product>(), 0, 1, 1);
+			pager = new Page<Product>(new ArrayList<Product>(), 0, 1, 1);
 		}
 		return pager;
 	}

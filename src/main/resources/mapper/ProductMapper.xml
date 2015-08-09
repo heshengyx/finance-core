@@ -19,7 +19,7 @@
 	<sql id="sqlQuery">
 		FROM PRODUCT a where 1=1
 		<if test="param.name != null and param.name != ''">
-			and NAME = #{param.name}
+			and a.NAME = #{param.name}
 		</if>
 	</sql>
 	
@@ -30,8 +30,8 @@
 		SELECT COUNT(1) <include refid="sqlQuery"/>
 	</select>
 	<select id="query" resultMap="productResult">
-		SELECT * <include refid="sqlQuery"/> 
-			order by CREATE_TIME desc limit #{start}, #{end}
+		SELECT a.* <include refid="sqlQuery"/> 
+			order by a.CREATE_TIME desc limit #{start}, #{end}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IPermissionDao;
 import com.myself.finance.entity.Permission;
+import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.PermissionQueryParam;
 import com.myself.finance.service.IPermissionService;
@@ -42,12 +43,12 @@ public class PermissionServiceImpl implements IPermissionService {
 		return permissionDao.getData(param);
 	}
 
-	public List<Permission> list(Page<PermissionQueryParam> param) {
-		return permissionDao.list(param);
-	}
-
 	public List<Permission> list(PermissionQueryParam param) {
 		return permissionDao.list(param);
 	}
 
+	@Override
+	public IPage<Permission> query(PermissionQueryParam param) {
+		return null;
+	}
 }

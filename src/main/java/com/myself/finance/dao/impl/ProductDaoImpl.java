@@ -8,7 +8,6 @@ import com.myself.finance.dao.BaseDao;
 import com.myself.finance.dao.IProductDao;
 import com.myself.finance.entity.Product;
 import com.myself.finance.mapper.IProductMapper;
-import com.myself.finance.page.Page;
 import com.myself.finance.param.ProductQueryParam;
 
 @Repository
@@ -33,12 +32,7 @@ public class ProductDaoImpl extends BaseDao<IProductMapper> implements IProductD
 		IProductMapper mapper = getMapper(IProductMapper.class);
 		return mapper.getData(param);
 	}
-
-	public List<Product> list(Page<ProductQueryParam> param) {
-		IProductMapper mapper = getMapper(IProductMapper.class);
-		return mapper.query(param);
-	}
-
+	
 	@Override
 	public List<Product> query(ProductQueryParam param, int start, int end) {
 		IProductMapper mapper = getMapper(IProductMapper.class);

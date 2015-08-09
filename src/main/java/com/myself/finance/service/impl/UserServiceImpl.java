@@ -18,7 +18,7 @@ import com.myself.finance.dao.IUserDao;
 import com.myself.finance.entity.Account;
 import com.myself.finance.entity.User;
 import com.myself.finance.page.IPage;
-import com.myself.finance.page.Pager;
+import com.myself.finance.page.Page;
 import com.myself.finance.param.UserParam;
 import com.myself.finance.param.UserQueryParam;
 import com.myself.finance.service.IUserService;
@@ -97,18 +97,17 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public IPage<User> query(UserQueryParam param) {
-		IPage<User> pager = null;
+		IPage<User> page = null;
 		int count = userDao.count(param);
 		if (count > 0) {
-			int page = (param.getPage() <= 0) ? 1 : param.getPage();
-			int start = (page - 1) * param.getLength();
-			param.setStart(start);
+			int pageNo = (param.getPage() <= 0) ? 1 : param.getPage();
+			int start = (pageNo - 1) * param.getLength();
 			int end = param.getLength();
-			List<User> list = userDao.query(param);
-			pager = new Pager<User>(list, count, page, end);
+			List<User> list = userDao.query(param, start, end);
+			page = new Page<User>(list, count, pageNo, end);
 		} else {
-			pager = new Pager<User>(new ArrayList<User>(), 0, 1, 1);
+			page = new Page<User>(new ArrayList<User>(), 0, 1, 1);
 		}
-		return pager;
+		return page;
 	}
 }

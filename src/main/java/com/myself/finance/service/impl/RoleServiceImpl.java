@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IRoleDao;
 import com.myself.finance.entity.Role;
+import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.RoleQueryParam;
 import com.myself.finance.service.IRoleService;
@@ -44,8 +45,10 @@ public class RoleServiceImpl implements IRoleService {
 		return roleDao.getData(param);
 	}
 
-	public List<Role> list(Page<RoleQueryParam> param) {
-		return roleDao.list(param);
+	@Override
+	public IPage<Role> query(RoleQueryParam param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,7 +3,6 @@ package com.myself.finance.dao;
 import java.util.List;
 
 import com.myself.finance.entity.AccountTrade;
-import com.myself.finance.page.Page;
 import com.myself.finance.param.AccountTradeQueryParam;
 
 public interface IAccountTradeDao {
@@ -13,5 +12,6 @@ public interface IAccountTradeDao {
 	int delete(AccountTrade param);
 	AccountTrade getData(AccountTrade param);
 	
-	List<AccountTrade> list(Page<AccountTradeQueryParam> param);
+	int count(AccountTradeQueryParam param);
+	List<AccountTrade> query(AccountTradeQueryParam param, int start, int end);
 }
