@@ -9,20 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myself.common.utils.UIDGeneratorUtil;
-import com.myself.finance.dao.AccountTradeDao;
+import com.myself.finance.dao.IAccountTradeDao;
 import com.myself.finance.entity.AccountTrade;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.AccountTradeQueryParam;
-import com.myself.finance.service.AccountTradeService;
+import com.myself.finance.service.IAccountTradeService;
 
 @Service("accountTradeService")
-public class AccountTradeServiceImpl implements AccountTradeService {
+public class AccountTradeServiceImpl implements IAccountTradeService {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(AccountTradeServiceImpl.class);
 	
 	@Autowired
-	private AccountTradeDao accountDetailDao;
+	private IAccountTradeDao accountDetailDao;
 	
 	public void save(AccountTrade param) {
 		param.setId(UIDGeneratorUtil.getUID());

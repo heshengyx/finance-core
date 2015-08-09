@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.myself.finance.dao.AccountTradeDao;
+import com.myself.finance.dao.IAccountTradeDao;
 import com.myself.finance.dao.BaseDao;
 import com.myself.finance.entity.AccountTrade;
-import com.myself.finance.mapper.AccountTradeMapper;
+import com.myself.finance.mapper.IAccountTradeMapper;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.AccountTradeQueryParam;
 
 @Repository
-public class AccountTradeDaoImpl extends BaseDao<AccountTradeMapper> implements AccountTradeDao {
+public class AccountTradeDaoImpl extends BaseDao<IAccountTradeMapper> implements IAccountTradeDao {
 
 	public int save(AccountTrade param) {
-		AccountTradeMapper mapper = getMapper(AccountTradeMapper.class);
+		IAccountTradeMapper mapper = getMapper(IAccountTradeMapper.class);
 		return mapper.save(param);
 	}
 
@@ -35,7 +35,7 @@ public class AccountTradeDaoImpl extends BaseDao<AccountTradeMapper> implements 
 	}
 
 	public List<AccountTrade> list(Page<AccountTradeQueryParam> param) {
-		AccountTradeMapper mapper = getMapper(AccountTradeMapper.class);
+		IAccountTradeMapper mapper = getMapper(IAccountTradeMapper.class);
 		return mapper.query(param);
 	}
 

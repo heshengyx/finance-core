@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.myself.finance.dao.BaseDao;
-import com.myself.finance.dao.UserDao;
+import com.myself.finance.dao.IUserDao;
 import com.myself.finance.entity.User;
-import com.myself.finance.mapper.UserMapper;
+import com.myself.finance.mapper.IUserMapper;
 import com.myself.finance.param.UserQueryParam;
 
 @Repository
-public class UserDaoImpl extends BaseDao<UserMapper> implements UserDao {
+public class UserDaoImpl extends BaseDao<IUserMapper> implements IUserDao {
 
 	public int save(User param) {
-		UserMapper mapper = getMapper(UserMapper.class);
+		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.save(param);
 	}
 
@@ -29,25 +29,25 @@ public class UserDaoImpl extends BaseDao<UserMapper> implements UserDao {
 	}
 
 	public User getData(User param) {
-		UserMapper mapper = getMapper(UserMapper.class);
+		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.getData(param);
 	}
 
 	@Override
 	public List<User> query(UserQueryParam param, int start, int end) {
-		UserMapper mapper = getMapper(UserMapper.class);
+		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.query(param, start, end);
 	}
 
 	@Override
 	public int count(UserQueryParam param) {
-		UserMapper mapper = getMapper(UserMapper.class);
+		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.count(param);
 	}
 
 	@Override
 	public List<User> query(UserQueryParam param) {
-		UserMapper mapper = getMapper(UserMapper.class);
+		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.query(param, param.getStart(), param.getLength());
 	}
 

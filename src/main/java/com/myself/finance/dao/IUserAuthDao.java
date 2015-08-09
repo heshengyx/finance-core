@@ -1,11 +1,11 @@
-package com.myself.finance.mapper;
+package com.myself.finance.dao;
 
 import java.util.List;
 
 import com.myself.finance.entity.UserAuth;
 import com.myself.finance.param.UserAuthQueryParam;
 
-public interface UserAuthMapper {
+public interface IUserAuthDao {
 
 	List<UserAuth> list(UserAuthQueryParam param);
 }

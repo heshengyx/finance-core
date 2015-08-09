@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myself.common.utils.UIDGeneratorUtil;
-import com.myself.finance.dao.RoleDao;
+import com.myself.finance.dao.IRoleDao;
 import com.myself.finance.entity.Role;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.RoleQueryParam;
-import com.myself.finance.service.RoleService;
+import com.myself.finance.service.IRoleService;
 
 @Service("roleService")
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements IRoleService {
 
 	@Autowired
-	private RoleDao roleDao;
+	private IRoleDao roleDao;
 	
 	public List<Role> queryRolesByUserId(String userId) {
 		return roleDao.queryRolesByUserId(userId);

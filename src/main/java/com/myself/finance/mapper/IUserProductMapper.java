@@ -6,7 +6,7 @@ import com.myself.finance.data.UserProductData;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.UserProductQueryParam;
 
-public interface UserProductMapper {
+public interface IUserProductMapper {
 
 	List<UserProductData> query(Page<UserProductQueryParam> param);
 }

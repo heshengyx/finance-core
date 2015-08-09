@@ -6,19 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myself.finance.dao.ProductDao;
+import com.myself.finance.dao.IProductDao;
 import com.myself.finance.entity.Product;
 import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
 import com.myself.finance.page.Pager;
 import com.myself.finance.param.ProductQueryParam;
-import com.myself.finance.service.ProductService;
+import com.myself.finance.service.IProductService;
 
 @Service("productService")
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements IProductService {
 
 	@Autowired
-	private ProductDao productDao;
+	private IProductDao productDao;
 	
 	public int save(Product param) {
 		// TODO Auto-generated method stub

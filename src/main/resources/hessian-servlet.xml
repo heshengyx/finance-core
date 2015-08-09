@@ -8,41 +8,41 @@
 
 	<bean name="/userService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="userService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.UserService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IUserService" />  
     </bean>
     
     <bean name="/roleService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="roleService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.RoleService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IRoleService" />  
     </bean>
     
     <bean name="/permissionService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="permissionService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.PermissionService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IPermissionService" />  
     </bean>
     
     <bean name="/productService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="productService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.ProductService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IProductService" />  
     </bean>
     
     <bean name="/userProductService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="userProductService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.UserProductService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IUserProductService" />  
     </bean>
     
     <bean name="/userAuthService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="userAuthService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.UserAuthService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IUserAuthService" />  
     </bean>
     
     <bean name="/accountService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="accountService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.AccountService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IAccountService" />  
     </bean>
     
     <bean name="/accountTradeService" class="org.springframework.remoting.caucho.HessianServiceExporter"> 
         <property name="service" ref="accountTradeService" />  
-        <property name="serviceInterface" value="com.myself.finance.service.AccountTradeService" />  
+        <property name="serviceInterface" value="com.myself.finance.service.IAccountTradeService" />  
     </bean>
 </beans>

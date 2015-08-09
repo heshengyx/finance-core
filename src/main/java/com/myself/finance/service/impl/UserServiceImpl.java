@@ -13,27 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myself.common.exception.ServiceException;
 import com.myself.common.utils.UIDGeneratorUtil;
-import com.myself.finance.dao.AccountDao;
-import com.myself.finance.dao.UserDao;
+import com.myself.finance.dao.IAccountDao;
+import com.myself.finance.dao.IUserDao;
 import com.myself.finance.entity.Account;
 import com.myself.finance.entity.User;
 import com.myself.finance.page.IPage;
 import com.myself.finance.page.Pager;
 import com.myself.finance.param.UserParam;
 import com.myself.finance.param.UserQueryParam;
-import com.myself.finance.service.UserService;
+import com.myself.finance.service.IUserService;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(UserServiceImpl.class);
 	
 	@Autowired
-	private UserDao userDao;
+	private IUserDao userDao;
 	
 	@Autowired
-	private AccountDao accountDao;
+	private IAccountDao accountDao;
 
 	public int save(User param) {
 		param.setId(UIDGeneratorUtil.getUID());

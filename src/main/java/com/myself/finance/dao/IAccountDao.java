@@ -2,7 +2,7 @@ package com.myself.finance.dao;
 
 import com.myself.finance.entity.Account;
 
-public interface AccountDao {
+public interface IAccountDao {
 
 	int save(Account param);
 	int update(Account param);

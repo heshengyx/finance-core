@@ -10,24 +10,24 @@ import org.springframework.stereotype.Service;
 import com.myself.common.exception.ServiceException;
 import com.myself.common.utils.MoneyUtil;
 import com.myself.common.utils.UIDGeneratorUtil;
-import com.myself.finance.dao.AccountDao;
-import com.myself.finance.dao.AccountTradeDao;
+import com.myself.finance.dao.IAccountDao;
+import com.myself.finance.dao.IAccountTradeDao;
 import com.myself.finance.entity.Account;
 import com.myself.finance.entity.AccountTrade;
 import com.myself.finance.param.AccountParam;
-import com.myself.finance.service.AccountService;
+import com.myself.finance.service.IAccountService;
 
 @Service("accountService")
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements IAccountService {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(AccountServiceImpl.class);
 	
 	@Autowired
-	private AccountDao accountDao;
+	private IAccountDao accountDao;
 	
 	@Autowired
-	private AccountTradeDao accountDetailDao;
+	private IAccountTradeDao accountDetailDao;
 	
 	public void save(Account param) {
 		param.setId(UIDGeneratorUtil.getUID());

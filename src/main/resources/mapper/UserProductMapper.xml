@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myself.finance.mapper.UserProductMapper">
+<mapper namespace="com.myself.finance.mapper.IUserProductMapper">
 	<resultMap type="com.myself.finance.data.UserProductData" id="userProductDataResult">
 <result column="USERNAME" property="username" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />

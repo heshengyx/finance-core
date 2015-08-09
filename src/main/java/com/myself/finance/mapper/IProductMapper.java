@@ -8,7 +8,7 @@ import com.myself.finance.entity.Product;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.ProductQueryParam;
 
-public interface ProductMapper {
+public interface IProductMapper {
 
 	int save(Product param);
 	int update(Product param);

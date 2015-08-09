@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myself.common.utils.UIDGeneratorUtil;
-import com.myself.finance.dao.PermissionDao;
+import com.myself.finance.dao.IPermissionDao;
 import com.myself.finance.entity.Permission;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.PermissionQueryParam;
-import com.myself.finance.service.PermissionService;
+import com.myself.finance.service.IPermissionService;
 
 @Service("permissionService")
-public class PermissionServiceImpl implements PermissionService {
+public class PermissionServiceImpl implements IPermissionService {
 
 	@Autowired
-	private PermissionDao permissionDao;
+	private IPermissionDao permissionDao;
 	
 	public List<Permission> queryPermissionsByRoleId(String roleId) {
 		return permissionDao.queryPermissionsByRoleId(roleId);

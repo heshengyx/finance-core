@@ -3,7 +3,7 @@ package com.myself.finance.mapper;
 import com.myself.finance.entity.Account;
 import com.myself.finance.entity.AccountTrade;
 
-public interface AccountMapper {
+public interface IAccountMapper {
 
 	int save(Account param);
 	int update(Account param);

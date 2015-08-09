@@ -1,4 +1,4 @@
-package com.myself.finance.mapper;
+package com.myself.finance.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.myself.finance.entity.Permission;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.PermissionQueryParam;
 
-public interface PermissionMapper {
+public interface IPermissionDao {
 
 	int save(Permission param);
 	int update(Permission param);
@@ -14,6 +14,6 @@ public interface PermissionMapper {
 	Permission getData(Permission param);
 	
 	List<Permission> list(PermissionQueryParam param);
-	List<Permission> query(Page<PermissionQueryParam> param);
+	List<Permission> list(Page<PermissionQueryParam> param);
 	List<Permission> queryPermissionsByRoleId(String roleId);
 }

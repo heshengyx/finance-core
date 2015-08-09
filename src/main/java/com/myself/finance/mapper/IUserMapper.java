@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.myself.finance.entity.User;
 import com.myself.finance.param.UserQueryParam;
 
-public interface UserMapper {
+public interface IUserMapper {
 
 	int save(User param);
 	int update(User param);

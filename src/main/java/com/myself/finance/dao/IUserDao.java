@@ -5,7 +5,7 @@ import java.util.List;
 import com.myself.finance.entity.User;
 import com.myself.finance.param.UserQueryParam;
 
-public interface UserDao {
+public interface IUserDao {
 
 	int save(User param);
 	int update(User param);
