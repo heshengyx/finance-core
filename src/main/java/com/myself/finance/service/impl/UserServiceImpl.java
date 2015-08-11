@@ -81,13 +81,12 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public int update(User param) {
-		// TODO Auto-generated method stub
-		return 0;
+		param.setUpdateTime(new Date());
+		return userDao.update(param);
 	}
 
 	public int delete(User param) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDao.delete(param);
 	}
 
 	@Override

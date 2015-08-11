@@ -49,4 +49,10 @@ public class PermissionDaoImpl extends BaseDao<IPermissionMapper> implements IPe
 		return mapper.query(param, start, end);
 	}
 
+	@Override
+	public int count(PermissionQueryParam param) {
+		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
+		return mapper.count(param);
+	}
+
 }

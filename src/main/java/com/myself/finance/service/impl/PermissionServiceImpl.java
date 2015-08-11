@@ -1,5 +1,6 @@
 package com.myself.finance.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,17 @@ public class PermissionServiceImpl implements IPermissionService {
 
 	@Override
 	public IPage<Permission> query(PermissionQueryParam param) {
-		return null;
+		IPage<Permission> page = null;
+		int count = permissionDao.count(param);
+		if (count > 0) {
+			int pageNo = (param.getPage() <= 0) ? 1 : param.getPage();
+			int start = (pageNo - 1) * param.getLength();
+			int end = param.getLength();
+			List<Permission> list = permissionDao.query(param, start, end);
+			page = new Page<Permission>(list, count, pageNo, end);
+		} else {
+			page = new Page<Permission>(new ArrayList<Permission>(), 0, 1, 1);
+		}
+		return page;
 	}
 }

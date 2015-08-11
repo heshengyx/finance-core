@@ -19,13 +19,13 @@ public class UserDaoImpl extends BaseDao<IUserMapper> implements IUserDao {
 	}
 
 	public int update(User param) {
-		// TODO Auto-generated method stub
-		return 0;
+		IUserMapper mapper = getMapper(IUserMapper.class);
+		return mapper.update(param);
 	}
 
 	public int delete(User param) {
-		// TODO Auto-generated method stub
-		return 0;
+		IUserMapper mapper = getMapper(IUserMapper.class);
+		return mapper.delete(param);
 	}
 
 	public User getData(User param) {

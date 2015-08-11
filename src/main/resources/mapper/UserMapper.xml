@@ -15,28 +15,28 @@
 	<sql id="sqlQuery">
 		FROM USER a where 1=1
 		<if test="param.username != null and param.username != ''">
-			and USERNAME = #{param.username}
+			and a.USERNAME = #{param.username}
 		</if>
 	</sql>
 	
 	<select id="getData" resultMap="userResult">
-		SELECT * FROM USER WHERE 1=1
-		<if test="account != null and account != ''">
-			and ACCOUNT = #{account}
+		SELECT a.* FROM USER a WHERE 1=1
+		<if test="param.account != null and param.account != ''">
+			and a.ACCOUNT = #{param.account}
 		</if>
-		<if test="username != null and username != ''">
-			and USERNAME = #{username}
+		<if test="param.username != null and param.username != ''">
+			and a.USERNAME = #{param.username}
 		</if>
-		<if test="id != null and id != ''">
-			and ID = #{id}
+		<if test="param.id != null and param.id != ''">
+			and a.ID = #{param.id}
 		</if>
 	</select>
 	<select id="count" resultType="java.lang.Integer">
 		SELECT COUNT(1) <include refid="sqlQuery"/>
 	</select>
 	<select id="query" resultMap="userResult">
-		SELECT * <include refid="sqlQuery"/> 
-			order by CREATE_TIME desc limit #{start}, #{end}
+		SELECT a.* <include refid="sqlQuery"/> 
+			order by a.CREATE_TIME desc limit #{start}, #{end}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -51,25 +51,16 @@
 	</insert>
 	
 	<update id="update">
-		update CLAZZ
+		update USER a
 		<set>
-<if test="className != null">
-	CLASS_NAME = #{className, jdbcType=VARCHAR},
-</if>
-<if test="tableName != null">
-	TABLE_NAME = #{tableName, jdbcType=VARCHAR},
-</if>
-<if test="title != null">
-	TITLE = #{title, jdbcType=VARCHAR},
-</if>
-<if test="status != null">
-	STATUS = #{status, jdbcType=VARCHAR},
-</if>
-
+		<if test="param.username != null and param.username != ''">
+			a.USERNAME = #{param.username}
+		</if>
 		</set>
-		where id = #{id, jdbcType=NUMERIC}
+		where a.ID = #{param.id, jdbcType=VARCHAR}
 	</update>
+	
 	<delete id="delete">
-		delete from CLAZZ where id = #{id, jdbcType=NUMERIC}
+		delete from USER a where a.ID = #{param.id, jdbcType=VARCHAR}
 	</delete>
 </mapper>

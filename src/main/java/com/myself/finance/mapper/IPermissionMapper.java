@@ -18,6 +18,8 @@ public interface IPermissionMapper {
 	Permission getData(Permission param);
 
 	List<Permission> list(PermissionQueryParam param);
+	
+	int count(@Param("param") PermissionQueryParam param);
 
 	List<Permission> query(@Param("param") PermissionQueryParam param,
 			@Param("start") int start, @Param("end") int end);
