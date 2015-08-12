@@ -1,5 +1,6 @@
 package com.myself.finance.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +48,18 @@ public class RoleServiceImpl implements IRoleService {
 
 	@Override
 	public IPage<Role> query(RoleQueryParam param) {
-		// TODO Auto-generated method stub
-		return null;
+		IPage<Role> page = null;
+		int count = roleDao.count(param);
+		if (count > 0) {
+			int pageNo = (param.getPage() <= 0) ? 1 : param.getPage();
+			int start = (pageNo - 1) * param.getLength();
+			int end = param.getLength();
+			List<Role> list = roleDao.query(param, start, end);
+			page = new Page<Role>(list, count, pageNo, end);
+		} else {
+			page = new Page<Role>(new ArrayList<Role>(), 0, 1, 1);
+		}
+		return page;
 	}
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myself.community.mapper.IRoleMapper">
+<mapper namespace="com.myself.finance.mapper.IRoleMapper">
 	<resultMap type="com.myself.finance.entity.Role" id="roleResult">
-		<id column="ID" property="id" jdbcType="NUMERIC" />
+		<id column="ID" property="id" jdbcType="VARCHAR" />
 <result column="NAME" property="name" jdbcType="VARCHAR" />
 <result column="STATUS" property="status" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
