@@ -23,6 +23,5 @@ public interface IPermissionMapper {
 
 	List<Permission> query(@Param("param") PermissionQueryParam param,
 			@Param("start") int start, @Param("end") int end);
-
 	List<Permission> queryPermissionsByRoleId(String roleId);
 }

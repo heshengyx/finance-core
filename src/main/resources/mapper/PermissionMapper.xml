@@ -60,6 +60,7 @@
 		</set>
 		where id = #{param.id, jdbcType=VARCHAR}
 	</update>
+	
 	<delete id="delete">
 		delete from PERMISSION where id = #{param.id, jdbcType=VARCHAR}
 	</delete>
