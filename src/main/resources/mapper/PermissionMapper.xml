@@ -29,42 +29,38 @@
 		SELECT COUNT(1) <include refid="sqlQuery"/>
 	</select>
 	<select id="query" resultMap="permissionResult">
-		SELECT a.* FROM <include refid="sqlQuery"/>
+		SELECT a.* <include refid="sqlQuery"/>
 			order by a.CREATE_TIME desc limit #{start}, #{end}
+	</select>
+	<select id="getData" resultMap="permissionResult">
+		SELECT a.* FROM PERMISSION a WHERE 1=1 and a.ID = #{param.id}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO PERMISSION (ID, PARENT_ID, NAME, URL, STATUS, CREATE_TIME, REMARKS)
 		VALUES (
-#{id, jdbcType=VARCHAR},
-#{parentId, jdbcType=VARCHAR},
-#{name, jdbcType=VARCHAR},
-#{url, jdbcType=VARCHAR},
-#{status, jdbcType=VARCHAR},
-#{createTime, jdbcType=TIMESTAMP},
-#{remarks, jdbcType=VARCHAR})
+#{param.id, jdbcType=VARCHAR},
+#{param.parentId, jdbcType=VARCHAR},
+#{param.name, jdbcType=VARCHAR},
+#{param.url, jdbcType=VARCHAR},
+#{param.status, jdbcType=VARCHAR},
+#{param.createTime, jdbcType=TIMESTAMP},
+#{param.remarks, jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="update">
-		update CLAZZ
+		update PERMISSION
 		<set>
-<if test="className != null">
-	CLASS_NAME = #{className, jdbcType=VARCHAR},
-</if>
-<if test="tableName != null">
-	TABLE_NAME = #{tableName, jdbcType=VARCHAR},
-</if>
-<if test="title != null">
-	TITLE = #{title, jdbcType=VARCHAR},
-</if>
-<if test="status != null">
-	STATUS = #{status, jdbcType=VARCHAR},
-</if>
-
+		<if test="param.name != null and param.name != ''">
+			NAME = #{param.name},
+		</if>
+		<if test="param.url != null and param.url != ''">
+			URL = #{param.url}
+		</if>
 		</set>
-		where id = #{id, jdbcType=NUMERIC}
+		where id = #{param.id, jdbcType=VARCHAR}
 	</update>
 	<delete id="delete">
-		delete from CLAZZ where id = #{id, jdbcType=NUMERIC}
+		delete from PERMISSION where id = #{param.id, jdbcType=VARCHAR}
 	</delete>
 </mapper>

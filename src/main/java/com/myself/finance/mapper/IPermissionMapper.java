@@ -9,13 +9,13 @@ import com.myself.finance.param.PermissionQueryParam;
 
 public interface IPermissionMapper {
 
-	int save(Permission param);
+	int save(@Param("param") Permission param);
 
-	int update(Permission param);
+	int update(@Param("param") Permission param);
 
-	int delete(Permission param);
+	int delete(@Param("param") Permission param);
 
-	Permission getData(Permission param);
+	Permission getData(@Param("param") Permission param);
 
 	List<Permission> list(PermissionQueryParam param);
 	
