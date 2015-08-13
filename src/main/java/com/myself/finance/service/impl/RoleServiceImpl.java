@@ -33,13 +33,12 @@ public class RoleServiceImpl implements IRoleService {
 	}
 
 	public int update(Role param) {
-		// TODO Auto-generated method stub
-		return 0;
+		param.setUpdateTime(new Date());
+		return roleDao.update(param);
 	}
 
 	public int delete(Role param) {
-		// TODO Auto-generated method stub
-		return 0;
+		return roleDao.delete(param);
 	}
 
 	public Role getData(Role param) {

@@ -22,5 +22,5 @@ public interface IRoleMapper {
 	List<Role> query(@Param("param") RoleQueryParam param,
 			@Param("start") int start, @Param("end") int end);
 
-	List<Role> queryRolesByUserId(String userId);
+	List<Role> queryRolesByUserId(@Param("userId") String userId);
 }

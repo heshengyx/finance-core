@@ -20,8 +20,8 @@
 	<select id="queryRolesByUserId" resultMap="roleResult">
 		SELECT a.* FROM ROLE a, USER_ROLE b WHERE a.ID = b.ROLE_ID AND b.USER_ID = #{userId}
 	</select>
-	<select id="getRole" resultMap="roleResult">
-		SELECT a.* FROM ROLE a WHERE a.ID=#{id, jdbcType=NUMERIC}
+	<select id="getData" resultMap="roleResult">
+		SELECT a.* FROM ROLE a WHERE a.ID=#{param.id, jdbcType=VARCHAR}
 	</select>
 	<select id="count" resultType="java.lang.Integer">
 		SELECT COUNT(1) <include refid="sqlQuery"/>
@@ -34,33 +34,23 @@
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ROLE (ID, NAME, STATUS, CREATE_TIME, REMARKS)
 		VALUES (
-#{id, jdbcType=VARCHAR},
-#{name, jdbcType=VARCHAR},
-#{status, jdbcType=VARCHAR},
-#{createTime, jdbcType=TIMESTAMP},
-#{remarks, jdbcType=VARCHAR})
+#{param.id, jdbcType=VARCHAR},
+#{param.name, jdbcType=VARCHAR},
+#{param.status, jdbcType=VARCHAR},
+#{param.createTime, jdbcType=TIMESTAMP},
+#{param.remarks, jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="update">
-		update CLAZZ
+		update ROLE a
 		<set>
-<if test="className != null">
-	CLASS_NAME = #{className, jdbcType=VARCHAR},
-</if>
-<if test="tableName != null">
-	TABLE_NAME = #{tableName, jdbcType=VARCHAR},
-</if>
-<if test="title != null">
-	TITLE = #{title, jdbcType=VARCHAR},
-</if>
-<if test="status != null">
-	STATUS = #{status, jdbcType=VARCHAR},
-</if>
-
+		<if test="param.name != null and param.name != ''">
+			a.NAME = #{param.name}
+		</if>
 		</set>
-		where id = #{id, jdbcType=NUMERIC}
+		where a.id = #{param.id, jdbcType=VARCHAR}
 	</update>
 	<delete id="delete">
-		delete from CLAZZ where id = #{id, jdbcType=NUMERIC}
+		delete from ROLE a where a.id = #{param.id, jdbcType=VARCHAR}
 	</delete>
 </mapper>
