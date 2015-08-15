@@ -6,6 +6,8 @@
 <result column="USERNAME" property="username" jdbcType="VARCHAR" />
 <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
 <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+<result column="PHONE" property="phone" jdbcType="VARCHAR" />
 <result column="STATUS" property="status" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
@@ -54,7 +56,13 @@
 		update USER a
 		<set>
 		<if test="param.username != null and param.username != ''">
-			a.USERNAME = #{param.username}
+			a.USERNAME = #{param.username},
+		</if>
+		<if test="param.email != null and param.email != ''">
+			a.EMAIL = #{param.email},
+		</if>
+		<if test="param.phone != null and param.phone != ''">
+			a.PHONE = #{param.phone}
 		</if>
 		</set>
 		where a.ID = #{param.id, jdbcType=VARCHAR}

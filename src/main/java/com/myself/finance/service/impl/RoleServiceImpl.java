@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IRoleDao;
+import com.myself.finance.data.RoleTreeData;
 import com.myself.finance.entity.Role;
+import com.myself.finance.entity.UserRole;
 import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.RoleQueryParam;
+import com.myself.finance.param.UserRoleParam;
 import com.myself.finance.service.IRoleService;
 
 @Service("roleService")
@@ -59,6 +62,48 @@ public class RoleServiceImpl implements IRoleService {
 			page = new Page<Role>(new ArrayList<Role>(), 0, 1, 1);
 		}
 		return page;
+	}
+
+	@Override
+	public List<Role> list(RoleQueryParam param) {
+		return roleDao.list(param);
+	}
+
+	@Override
+	public List<RoleTreeData> tree(RoleQueryParam param) {
+		List<Role> datas = roleDao.list(param);
+		List<UserRole> roles = roleDao.queryUserRolesByUserId(param.getUserId());
+		StringBuffer userRoles = new StringBuffer("");
+		for (UserRole userRole : roles) {
+			userRoles.append(userRole.getRoleId()).append(";");
+		}
+		List<RoleTreeData> trees = new ArrayList<RoleTreeData>();
+		RoleTreeData tree = null;
+		for (Role role : datas) {
+			tree = new RoleTreeData();
+			tree.setId(role.getId());
+			tree.setName(role.getName());
+			tree.setTag(role.getTag());
+			if (userRoles.toString().indexOf(role.getId()) != -1) {
+				tree.setChecked(true);
+			}
+			trees.add(tree);
+		}
+		return trees;
+	}
+
+	@Override
+	public void saveUserRoles(UserRoleParam param) {
+		List<UserRole> datas = new ArrayList<UserRole>();
+		UserRole userRole = null;
+		String[] roleIds = param.getRoleId();
+		for (String roleId : roleIds) {
+			userRole = new UserRole();
+			userRole.setUserId(param.getUserId());
+			userRole.setRoleId(roleId);
+			datas.add(userRole);
+		}
+		roleDao.saveUserRoles(datas);
 	}
 
 }

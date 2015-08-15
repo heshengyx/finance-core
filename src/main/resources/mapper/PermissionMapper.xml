@@ -5,6 +5,7 @@
 		<id column="ID" property="id" jdbcType="VARCHAR" />
 		<id column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
 <result column="NAME" property="name" jdbcType="VARCHAR" />
+<result column="TAG" property="tag" jdbcType="VARCHAR" />
 <result column="URL" property="url" jdbcType="VARCHAR" />
 <result column="STATUS" property="status" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
@@ -37,11 +38,12 @@
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO PERMISSION (ID, PARENT_ID, NAME, URL, STATUS, CREATE_TIME, REMARKS)
+		INSERT INTO PERMISSION (ID, PARENT_ID, NAME, TAG, URL, STATUS, CREATE_TIME, REMARKS)
 		VALUES (
 #{param.id, jdbcType=VARCHAR},
 #{param.parentId, jdbcType=VARCHAR},
 #{param.name, jdbcType=VARCHAR},
+#{param.tag, jdbcType=VARCHAR},
 #{param.url, jdbcType=VARCHAR},
 #{param.status, jdbcType=VARCHAR},
 #{param.createTime, jdbcType=TIMESTAMP},
@@ -53,6 +55,9 @@
 		<set>
 		<if test="param.name != null and param.name != ''">
 			NAME = #{param.name},
+		</if>
+		<if test="param.tag != null and param.tag != ''">
+			TAG = #{param.tag},
 		</if>
 		<if test="param.url != null and param.url != ''">
 			URL = #{param.url}

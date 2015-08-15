@@ -4,10 +4,15 @@
 	<resultMap type="com.myself.finance.entity.Role" id="roleResult">
 		<id column="ID" property="id" jdbcType="VARCHAR" />
 <result column="NAME" property="name" jdbcType="VARCHAR" />
+<result column="TAG" property="tag" jdbcType="VARCHAR" />
 <result column="STATUS" property="status" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
 <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="com.myself.finance.entity.UserRole" id="userRoleResult">
+	    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+	    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<sql id="sqlQuery">
@@ -17,9 +22,6 @@
 		</if>
 	</sql>
 	
-	<select id="queryRolesByUserId" resultMap="roleResult">
-		SELECT a.* FROM ROLE a, USER_ROLE b WHERE a.ID = b.ROLE_ID AND b.USER_ID = #{userId}
-	</select>
 	<select id="getData" resultMap="roleResult">
 		SELECT a.* FROM ROLE a WHERE a.ID=#{param.id, jdbcType=VARCHAR}
 	</select>
@@ -30,12 +32,20 @@
 		SELECT a.* <include refid="sqlQuery"/>
 			order by a.CREATE_TIME desc limit #{start}, #{end}
 	</select>
+	<select id="list" resultMap="roleResult">
+		SELECT a.* <include refid="sqlQuery"/>
+			order by a.CREATE_TIME desc
+	</select>
+	<select id="queryRolesByUserId" resultMap="roleResult">
+		SELECT a.* FROM ROLE a, USER_ROLE b WHERE a.ID = b.ROLE_ID AND b.USER_ID = #{userId}
+	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO ROLE (ID, NAME, STATUS, CREATE_TIME, REMARKS)
+		INSERT INTO ROLE (ID, NAME, TAG, STATUS, CREATE_TIME, REMARKS)
 		VALUES (
 #{param.id, jdbcType=VARCHAR},
 #{param.name, jdbcType=VARCHAR},
+#{param.tag, jdbcType=VARCHAR},
 #{param.status, jdbcType=VARCHAR},
 #{param.createTime, jdbcType=TIMESTAMP},
 #{param.remarks, jdbcType=VARCHAR})
@@ -45,12 +55,33 @@
 		update ROLE a
 		<set>
 		<if test="param.name != null and param.name != ''">
-			a.NAME = #{param.name}
+			a.NAME = #{param.name},
+		</if>
+		<if test="param.tag != null and param.tag != ''">
+			a.TAG = #{param.tag}
 		</if>
 		</set>
 		where a.id = #{param.id, jdbcType=VARCHAR}
 	</update>
 	<delete id="delete">
 		delete from ROLE a where a.id = #{param.id, jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="queryUserRolesByUserId" resultMap="userRoleResult">
+		SELECT a.* FROM USER_ROLE a WHERE a.USER_ID = #{userId}
+	</select>
+	<insert id="saveUserRoles">
+		INSERT INTO USER_ROLE (USER_ID, ROLE_ID)
+		VALUES 
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+		#{item.userId, jdbcType=VARCHAR},
+		#{item.roleId, jdbcType=VARCHAR}
+		)
+		</foreach>
+		
+	</insert>
+	<delete id="deleteUserRolesByUserId">
+		delete from USER_ROLE a where a.USER_ID = #{userId, jdbcType=VARCHAR}
 	</delete>
 </mapper>

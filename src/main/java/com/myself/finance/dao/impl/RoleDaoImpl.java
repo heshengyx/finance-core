@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.myself.finance.dao.BaseDao;
 import com.myself.finance.dao.IRoleDao;
 import com.myself.finance.entity.Role;
+import com.myself.finance.entity.UserRole;
 import com.myself.finance.mapper.IRoleMapper;
 import com.myself.finance.param.RoleQueryParam;
 
@@ -48,5 +49,23 @@ public class RoleDaoImpl extends BaseDao<IRoleMapper> implements IRoleDao {
 	public int count(RoleQueryParam param) {
 		IRoleMapper mapper = getMapper(IRoleMapper.class);
 		return mapper.count(param);
+	}
+
+	@Override
+	public List<Role> list(RoleQueryParam param) {
+		IRoleMapper mapper = getMapper(IRoleMapper.class);
+		return mapper.list(param);
+	}
+
+	@Override
+	public List<UserRole> queryUserRolesByUserId(String userId) {
+		IRoleMapper mapper = getMapper(IRoleMapper.class);
+		return mapper.queryUserRolesByUserId(userId);
+	}
+
+	@Override
+	public int saveUserRoles(List<UserRole> param) {
+		IRoleMapper mapper = getMapper(IRoleMapper.class);
+		return mapper.saveUserRoles(param);
 	}
 }
