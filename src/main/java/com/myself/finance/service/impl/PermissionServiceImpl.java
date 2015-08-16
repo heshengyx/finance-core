@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IPermissionDao;
+import com.myself.finance.data.PermissionTreeData;
 import com.myself.finance.entity.Permission;
+import com.myself.finance.entity.RolePermission;
 import com.myself.finance.page.IPage;
 import com.myself.finance.page.Page;
 import com.myself.finance.param.PermissionQueryParam;
+import com.myself.finance.param.RolePermissionParam;
 import com.myself.finance.service.IPermissionService;
 
 @Service("permissionService")
@@ -62,5 +65,50 @@ public class PermissionServiceImpl implements IPermissionService {
 			page = new Page<Permission>(new ArrayList<Permission>(), 0, 1, 1);
 		}
 		return page;
+	}
+
+	@Override
+	public List<PermissionTreeData> tree(PermissionQueryParam param) {
+		List<Permission> datas = permissionDao.list(param);
+		List<RolePermission> permissions = permissionDao.queryRolePermissionsByRoleId(param.getRoleId());
+		StringBuffer rolePermissions = new StringBuffer("");
+		for (RolePermission rolePermission : permissions) {
+			rolePermissions.append(rolePermission.getPermissionId()).append(";");
+		}
+		
+		List<PermissionTreeData> trees = new ArrayList<PermissionTreeData>();
+		PermissionTreeData tree = null;
+		int i = 0;
+		for (Permission permission : datas) {
+			tree = new PermissionTreeData();
+			tree.setId(permission.getId());
+			tree.setParentId((permission.getParentId() == null) ? "" : permission.getParentId());
+			tree.setName(permission.getName());
+			tree.setTag(permission.getTag());
+			if (rolePermissions.toString().indexOf(permission.getId()) != -1) {
+				tree.setChecked(true);
+			}
+			if (i == 0 && permission.getParentId() == null) {
+				tree.setOpen(true);
+				i++;
+			}
+			trees.add(tree);
+		}
+		return trees;
+	}
+
+	@Override
+	public void saveRolePermissions(RolePermissionParam param) {
+		permissionDao.deleteRolePermissionsByRoleId(param.getRoleId());
+		List<RolePermission> datas = new ArrayList<RolePermission>();
+		RolePermission rolePermission = null;
+		String[] permissionIds = param.getPermissionId();
+		for (String permissionId : permissionIds) {
+			rolePermission = new RolePermission();
+			rolePermission.setRoleId(param.getRoleId());
+			rolePermission.setPermissionId(permissionId);
+			datas.add(rolePermission);
+		}
+		permissionDao.saveRolePermissions(datas);
 	}
 }

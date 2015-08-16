@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.myself.finance.dao.BaseDao;
 import com.myself.finance.dao.IPermissionDao;
 import com.myself.finance.entity.Permission;
+import com.myself.finance.entity.RolePermission;
 import com.myself.finance.mapper.IPermissionMapper;
 import com.myself.finance.param.PermissionQueryParam;
 
@@ -53,6 +54,24 @@ public class PermissionDaoImpl extends BaseDao<IPermissionMapper> implements IPe
 	public int count(PermissionQueryParam param) {
 		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
 		return mapper.count(param);
+	}
+
+	@Override
+	public List<RolePermission> queryRolePermissionsByRoleId(String roleId) {
+		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
+		return mapper.queryRolePermissionsByRoleId(roleId);
+	}
+
+	@Override
+	public int deleteRolePermissionsByRoleId(String roleId) {
+		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
+		return mapper.deleteRolePermissionsByRoleId(roleId);
+	}
+
+	@Override
+	public int saveRolePermissions(List<RolePermission> param) {
+		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
+		return mapper.saveRolePermissions(param);
 	}
 
 }

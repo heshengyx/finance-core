@@ -73,13 +73,12 @@
 	<insert id="saveUserRoles">
 		INSERT INTO USER_ROLE (USER_ID, ROLE_ID)
 		VALUES 
-		<foreach collection="list" item="item" index="index" separator=",">
+		<foreach collection="param" item="item" index="index" separator=",">
 		(
 		#{item.userId, jdbcType=VARCHAR},
 		#{item.roleId, jdbcType=VARCHAR}
 		)
 		</foreach>
-		
 	</insert>
 	<delete id="deleteUserRolesByUserId">
 		delete from USER_ROLE a where a.USER_ID = #{userId, jdbcType=VARCHAR}

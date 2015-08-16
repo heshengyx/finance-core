@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.myself.finance.entity.Permission;
+import com.myself.finance.entity.RolePermission;
 import com.myself.finance.param.PermissionQueryParam;
 
 public interface IPermissionMapper {
@@ -24,4 +25,9 @@ public interface IPermissionMapper {
 	List<Permission> query(@Param("param") PermissionQueryParam param,
 			@Param("start") int start, @Param("end") int end);
 	List<Permission> queryPermissionsByRoleId(String roleId);
+	
+	int saveRolePermissions(@Param("param") List<RolePermission> param);
+	List<RolePermission> queryRolePermissionsByRoleId(@Param("roleId") String roleId);
+	int deleteRolePermissionsByRoleId(@Param("roleId") String roleId);
+	
 }

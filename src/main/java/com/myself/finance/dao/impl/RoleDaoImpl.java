@@ -68,4 +68,10 @@ public class RoleDaoImpl extends BaseDao<IRoleMapper> implements IRoleDao {
 		IRoleMapper mapper = getMapper(IRoleMapper.class);
 		return mapper.saveUserRoles(param);
 	}
+
+	@Override
+	public int deleteUserRolesByUserId(String userId) {
+		IRoleMapper mapper = getMapper(IRoleMapper.class);
+		return mapper.deleteUserRolesByUserId(userId);
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myself.common.utils.UIDGeneratorUtil;
 import com.myself.finance.dao.IRoleDao;
@@ -92,8 +93,10 @@ public class RoleServiceImpl implements IRoleService {
 		return trees;
 	}
 
+	@Transactional
 	@Override
 	public void saveUserRoles(UserRoleParam param) {
+		roleDao.deleteUserRolesByUserId(param.getUserId());
 		List<UserRole> datas = new ArrayList<UserRole>();
 		UserRole userRole = null;
 		String[] roleIds = param.getRoleId();

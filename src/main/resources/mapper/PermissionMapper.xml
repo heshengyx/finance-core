@@ -12,6 +12,10 @@
 <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
 <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
 	</resultMap>
+	<resultMap type="com.myself.finance.entity.RolePermission" id="rolePermissionResult">
+	    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+	    <result column="PERMISSION_ID" property="permissionId" jdbcType="VARCHAR" />
+	</resultMap>
 	
 	<sql id="sqlQuery">
 		FROM PERMISSION a where 1=1
@@ -24,7 +28,7 @@
 		SELECT a.* FROM PERMISSION a, ROLE_PERMISSION b WHERE a.ID = b.PERMISSION_ID AND b.ROLE_ID = #{roleId}
 	</select>
 	<select id="list" resultMap="permissionResult">
-		SELECT a.* FROM PERMISSION a
+		SELECT a.* FROM PERMISSION a order by a.CREATE_TIME desc
 	</select>
 	<select id="count" resultType="java.lang.Integer">
 		SELECT COUNT(1) <include refid="sqlQuery"/>
@@ -59,14 +63,30 @@
 		<if test="param.tag != null and param.tag != ''">
 			TAG = #{param.tag},
 		</if>
-		<if test="param.url != null and param.url != ''">
-			URL = #{param.url}
-		</if>
+		URL = #{param.url},
+		UPDATE_TIME = #{param.updateTime, jdbcType=TIMESTAMP}
 		</set>
 		where id = #{param.id, jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="delete">
 		delete from PERMISSION where id = #{param.id, jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="saveRolePermissions">
+		INSERT INTO ROLE_PERMISSION (ROLE_ID, PERMISSION_ID)
+		VALUES 
+		<foreach collection="param" item="item" index="index" separator=",">
+		(
+		#{item.roleId, jdbcType=VARCHAR},
+		#{item.permissionId, jdbcType=VARCHAR}
+		)
+		</foreach>
+	</insert>
+	<select id="queryRolePermissionsByRoleId" resultMap="rolePermissionResult">
+		SELECT a.* FROM ROLE_PERMISSION a WHERE a.ROLE_ID = #{roleId}
+	</select>
+	<delete id="deleteRolePermissionsByRoleId">
+		delete from ROLE_PERMISSION a where a.ROLE_ID = #{roleId, jdbcType=VARCHAR}
 	</delete>
 </mapper>

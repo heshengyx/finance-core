@@ -20,4 +20,5 @@ public interface IRoleDao {
 	
 	int saveUserRoles(List<UserRole> param);
 	List<UserRole> queryUserRolesByUserId(String userId);
+	int deleteUserRolesByUserId(String userId);
 }
