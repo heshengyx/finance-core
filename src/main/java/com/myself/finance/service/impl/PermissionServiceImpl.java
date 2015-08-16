@@ -48,7 +48,14 @@ public class PermissionServiceImpl implements IPermissionService {
 	}
 
 	public List<Permission> list(PermissionQueryParam param) {
-		return permissionDao.list(param);
+		List<Permission> datas = new ArrayList<Permission>();
+		List<Permission> permissions = permissionDao.list(param);
+		for (Permission permission : permissions) {
+			datas.add(permission);
+			param.setParentId(permission.getId());
+			datas.addAll(permissionDao.list(param));
+		}
+		return datas;
 	}
 
 	@Override

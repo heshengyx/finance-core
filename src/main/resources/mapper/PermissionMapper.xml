@@ -28,7 +28,14 @@
 		SELECT a.* FROM PERMISSION a, ROLE_PERMISSION b WHERE a.ID = b.PERMISSION_ID AND b.ROLE_ID = #{roleId}
 	</select>
 	<select id="list" resultMap="permissionResult">
-		SELECT a.* FROM PERMISSION a order by a.CREATE_TIME desc
+		SELECT a.* FROM PERMISSION a where 1=1
+		<if test="param.parentId != null and param.parentId != ''">
+			and PARENT_ID = #{param.parentId}
+		</if>
+		<if test="param.parentId == null or param.parentId == ''">
+			and PARENT_ID is null
+		</if>
+		order by a.CREATE_TIME desc
 	</select>
 	<select id="count" resultType="java.lang.Integer">
 		SELECT COUNT(1) <include refid="sqlQuery"/>
