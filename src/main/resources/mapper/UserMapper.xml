@@ -9,6 +9,7 @@
 <result column="EMAIL" property="email" jdbcType="VARCHAR" />
 <result column="PHONE" property="phone" jdbcType="VARCHAR" />
 <result column="STATUS" property="status" jdbcType="VARCHAR" />
+<result column="LEVEL" property="level" jdbcType="VARCHAR" />
 <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
 <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
