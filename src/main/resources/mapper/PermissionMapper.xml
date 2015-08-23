@@ -73,6 +73,7 @@
 		<if test="param.tag != null and param.tag != ''">
 			TAG = #{param.tag},
 		</if>
+		PARENT_ID = #{param.parentId},
 		URL = #{param.url},
 		UPDATE_TIME = #{param.updateTime, jdbcType=TIMESTAMP}
 		</set>
