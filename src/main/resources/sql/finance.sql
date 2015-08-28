@@ -214,3 +214,5 @@ JOIN
     permission d
 ON
     c.permission_id = d.id
+
+http://itindex.net/detail/50593-web-%E9%A1%B9%E7%9B%AE-%E5%BA%94%E7%94%A8
