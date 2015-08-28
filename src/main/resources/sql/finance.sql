@@ -196,3 +196,21 @@ INSERT INTO USER_AUTH(ID, USER_ID, AUTH_TYPE, STATUS, CREATE_TIME) VALUES('f78fc
 INSERT INTO USER_AUTH(ID, USER_ID, AUTH_TYPE, STATUS, CREATE_TIME) VALUES('f78fc614ce459cc168002', 'e78fc614ce459cc168000', 'C', '1', now())
 
 INSERT INTO ACCOUNT(ID, USER_ID, BALANCE, STATUS, CREATE_TIME) VALUES('h78fc614ce459cc168000', 'e78fc614ce459cc168000', 0, '1', now())
+SELECT
+    b.name,
+    d.*
+FROM
+    user_role a
+JOIN
+    role b
+ON
+    a.user_id = 'z19f5314e912819698000'
+AND a.role_id = b.id --z19f5314e912819698000 admin
+JOIN
+    role_permission c
+ON
+    b.id = c.role_id
+JOIN
+    permission d
+ON
+    c.permission_id = d.id
