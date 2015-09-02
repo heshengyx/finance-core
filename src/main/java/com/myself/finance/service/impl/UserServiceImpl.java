@@ -109,4 +109,9 @@ public class UserServiceImpl implements IUserService {
 		}
 		return page;
 	}
+
+	@Override
+	public User getDataByUsername(User param) {
+		return userDao.getDataByUsername(param);
+	}
 }

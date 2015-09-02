@@ -3,6 +3,7 @@
 <mapper namespace="com.myself.finance.mapper.IUserMapper">
 	<resultMap type="com.myself.finance.entity.User" id="userResult">
 		<id column="ID" property="id" jdbcType="VARCHAR" />
+<result column="NAME" property="name" jdbcType="VARCHAR" />
 <result column="USERNAME" property="username" jdbcType="VARCHAR" />
 <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
 <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
@@ -23,16 +24,10 @@
 	</sql>
 	
 	<select id="getData" resultMap="userResult">
-		SELECT a.* FROM USER a WHERE 1=1
-		<if test="param.account != null and param.account != ''">
-			and a.ACCOUNT = #{param.account}
-		</if>
-		<if test="param.username != null and param.username != ''">
-			and a.USERNAME = #{param.username}
-		</if>
-		<if test="param.id != null and param.id != ''">
-			and a.ID = #{param.id}
-		</if>
+		SELECT a.* FROM USER a WHERE a.ID = #{param.id}
+	</select>
+	<select id="getDataByUsername" resultMap="userResult">
+		SELECT a.* FROM USER a WHERE a.USERNAME = #{param.username}
 	</select>
 	<select id="count" resultType="java.lang.Integer">
 		SELECT COUNT(1) <include refid="sqlQuery"/>
@@ -43,9 +38,10 @@
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO USER (ID, USERNAME, ACCOUNT, PASSWORD, STATUS, CREATE_TIME)
+		INSERT INTO USER (ID, NAME, USERNAME, ACCOUNT, PASSWORD, STATUS, CREATE_TIME)
 		VALUES (
 #{id, jdbcType=VARCHAR},
+#{name, jdbcType=VARCHAR},
 #{username, jdbcType=VARCHAR},
 #{account, jdbcType=VARCHAR},
 #{password, jdbcType=VARCHAR},
@@ -56,8 +52,8 @@
 	<update id="update">
 		update USER a
 		<set>
-		<if test="param.username != null and param.username != ''">
-			a.USERNAME = #{param.username},
+		<if test="param.name != null and param.name != ''">
+			a.NAME = #{param.name},
 		</if>
 		<if test="param.email != null and param.email != ''">
 			a.EMAIL = #{param.email},

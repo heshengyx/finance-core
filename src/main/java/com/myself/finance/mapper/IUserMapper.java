@@ -13,6 +13,7 @@ public interface IUserMapper {
 	int update(@Param("param") User param);
 	int delete(@Param("param") User param);
 	User getData(@Param("param") User param);
+	User getDataByUsername(@Param("param") User param);
 
 	int count(@Param("param") UserQueryParam param);
 	List<User> query(@Param("param") UserQueryParam param,

@@ -11,6 +11,7 @@ public interface IUserDao {
 	int update(User param);
 	int delete(User param);
 	User getData(User param);
+	User getDataByUsername(User param);
 	
 	int count(UserQueryParam param);
 	List<User> query(UserQueryParam param, int start, int end);

@@ -44,4 +44,10 @@ public class UserDaoImpl extends BaseDao<IUserMapper> implements IUserDao {
 		IUserMapper mapper = getMapper(IUserMapper.class);
 		return mapper.count(param);
 	}
+
+	@Override
+	public User getDataByUsername(User param) {
+		IUserMapper mapper = getMapper(IUserMapper.class);
+		return mapper.getDataByUsername(param);
+	}
 }
