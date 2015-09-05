@@ -75,9 +75,9 @@ public class PermissionDaoImpl extends BaseDao<IPermissionMapper> implements IPe
 	}
 
 	@Override
-	public List<Permission> tree(PermissionQueryParam param) {
+	public List<Permission> queryPermissions() {
 		IPermissionMapper mapper = getMapper(IPermissionMapper.class);
-		return mapper.tree(param);
+		return mapper.queryPermissions();
 	}
 
 }

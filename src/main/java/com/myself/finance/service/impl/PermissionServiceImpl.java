@@ -76,7 +76,7 @@ public class PermissionServiceImpl implements IPermissionService {
 
 	@Override
 	public List<PermissionTreeData> tree(PermissionQueryParam param) {
-		List<Permission> datas = permissionDao.tree(param);
+		List<Permission> datas = permissionDao.queryPermissions();
 		List<RolePermission> permissions = permissionDao.queryRolePermissionsByRoleId(param.getRoleId());
 		StringBuffer rolePermissions = new StringBuffer("");
 		for (RolePermission rolePermission : permissions) {
@@ -117,5 +117,10 @@ public class PermissionServiceImpl implements IPermissionService {
 			datas.add(rolePermission);
 		}
 		permissionDao.saveRolePermissions(datas);
+	}
+
+	@Override
+	public List<Permission> queryPermissions() {
+		return permissionDao.queryPermissions();
 	}
 }

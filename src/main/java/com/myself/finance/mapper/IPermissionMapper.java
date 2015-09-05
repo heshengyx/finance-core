@@ -27,6 +27,7 @@ public interface IPermissionMapper {
 	List<Permission> query(@Param("param") PermissionQueryParam param,
 			@Param("start") int start, @Param("end") int end);
 	List<Permission> queryPermissionsByRoleId(String roleId);
+	List<Permission> queryPermissions();
 	
 	int saveRolePermissions(@Param("param") List<RolePermission> param);
 	List<RolePermission> queryRolePermissionsByRoleId(@Param("roleId") String roleId);

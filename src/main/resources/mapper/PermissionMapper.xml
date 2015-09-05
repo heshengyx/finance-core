@@ -27,7 +27,7 @@
 	<select id="queryPermissionsByRoleId" resultMap="permissionResult">
 		SELECT a.* FROM PERMISSION a, ROLE_PERMISSION b WHERE a.ID = b.PERMISSION_ID AND b.ROLE_ID = #{roleId}
 	</select>
-	<select id="tree" resultMap="permissionResult">
+	<select id="queryPermissions" resultMap="permissionResult">
 		SELECT a.* FROM PERMISSION a order by a.CREATE_TIME desc
 	</select>
 	<select id="list" resultMap="permissionResult">
