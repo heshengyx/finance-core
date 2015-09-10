@@ -42,11 +42,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Transactional
-	public void register(UserParam param) {
-		String kaptchaCode = param.getKaptchaCode();
-		String kaptchaValue = param.getKaptchaValue();
-		if (!kaptchaValue.equals(kaptchaCode)) {
-			logger.info("验证码输入不正确，kaptchaCode={}，kaptchaCode={}", new Object[]{kaptchaCode, kaptchaValue});
+	public void register(UserParam param, String captcha) {
+		if (!captcha.equals(param.getCaptcha())) {
+			logger.info("验证码输入不正确，输入验证码={}，图片验证码={}", new Object[]{param.getCaptcha(), captcha});
 			throw new ServiceException("验证码输入不正确");
 		}
 		
